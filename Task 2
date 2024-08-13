@@ -1,0 +1,68 @@
+#STUDENT GRADE TRACKER
+
+grades = {}
+
+def add_grade():
+    subject = input("Enter subject: ")
+    grade = float(input("Enter grade: "))
+    if subject in grades:
+        grades[subject].append(grade)
+    else:
+        grades[subject] = [grade]
+
+def calculate_average(subject):
+    return sum(grades[subject]) / len(grades[subject])
+
+def get_letter_grade(average_grade):
+    if average_grade >= 90:
+        return 'A'
+    elif average_grade >= 80:
+        return 'B'
+    elif average_grade >= 70:
+        return 'C'
+    elif average_grade >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+def calculate_gpa(average_grade):
+    if average_grade >= 90:
+        return 4.0
+    elif average_grade >= 80:
+        return 3.0
+    elif average_grade >= 70:
+        return 2.0
+    elif average_grade >= 60:
+        return 1.0
+    else:
+        return 0.0
+
+def display_grades():
+    for subject, grade_list in grades.items():
+        average_grade = calculate_average(subject)
+        letter_grade = get_letter_grade(average_grade)
+        gpa = calculate_gpa(average_grade)
+        print(f"{subject}:")
+        print(f"Average Grade: {average_grade:.2f}")
+        print(f"Letter Grade: {letter_grade}")
+        print(f"GPA: {gpa:.2f}")
+        print()
+
+def main():
+    while True:
+        print("1. Add Grade")
+        print("2. Display Grades")
+        print("3. Exit")
+        choice = input("Choose an option: ")
+        if choice == "1":
+            add_grade()
+        elif choice == "2":
+            display_grades()
+        elif choice == "3":
+            break
+        else:
+            print("Invalid choice. Please choose a valid option.")
+
+if __name__ == "__main__":
+    main()
+
